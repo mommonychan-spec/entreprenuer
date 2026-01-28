@@ -1,0 +1,1411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Check • Modern</title>
+
+    <style>
+
+
+
+html{
+    scroll-behavior: smooth;
+}
+
+.container{
+    width: 100%;
+    height: 100vh;
+}
+
+nav{
+    width: 100%;
+    height: 70px;
+    background-color: rgb(219, 212, 203);
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    
+}
+
+nav>.menu>ul{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    list-style: none;
+    
+}
+
+
+        :root {
+            --bg: #0b1020;
+            --card: rgba(255, 255, 255, 0.08);
+            --card2: rgba(255, 255, 255, 0.06);
+            --stroke: rgba(255, 255, 255, 0.14);
+            --text: rgba(255, 255, 255, 0.92);
+            --muted: rgba(255, 255, 255, 0.62);
+            --muted2: rgba(255, 255, 255, 0.46);
+
+            --accent: #7c4dff;
+            --accent2: #00d4ff;
+            --good: #34d399;
+            --warn: #fbbf24;
+            --bad: #fb7185;
+
+            --shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+            --shadow2: 0 10px 30px rgba(0, 0, 0, 0.35);
+
+            --radius: 18px;
+            --radius2: 14px;
+            --blur: 18px;
+            --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+        }
+
+        * {
+            box-sizing: border-box
+            
+        }
+
+        html,
+        body {
+            height: 100%
+            
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font);
+            color: var(--text);
+            background:
+                radial-gradient(1200px 800px at 18% 10%, rgba(124, 77, 255, 0.35), transparent 60%),
+                radial-gradient(1000px 700px at 85% 18%, rgba(0, 212, 255, 0.25), transparent 60%),
+                radial-gradient(900px 700px at 55% 92%, rgba(52, 211, 153, 0.18), transparent 60%),
+                linear-gradient(180deg, #070a14, var(--bg));
+            overflow-x: hidden;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 18px 40px;
+        }
+
+        /* Top bar */
+        .top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .brand .title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            font-size: 22px;
+        }
+
+        .logo {
+            width: 36px;
+            height: 36px;
+            border-radius: 12px;
+            /* background: linear-gradient(135deg, var(--accent), var(--accent2)); */
+            background-image: url(https://media.licdn.com/dms/image/v2/C4E22AQFEcsuyNeWRiQ/feedshare-shrink_800/feedshare-shrink_800/0/1605667646490?e=2147483647&v=beta&t=KzKf7Gj1j9R1ikQTRfgnykUHOijlBhXzzZXSxbuh6WY);
+            background-size: cover;
+            box-shadow: 0 14px 40px rgba(124, 77, 255, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* .logo::after {
+            content: "";
+            position: absolute;
+            inset: -30%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.55), transparent 55%);
+            transform: rotate(25deg);
+        } */
+
+        .subtitle {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 1.35;
+            max-width: 520px;
+        }
+
+        .right-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(var(--blur));
+            padding: 10px 12px;
+            border-radius: 999px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            box-shadow: var(--shadow2);
+        }
+
+        .pill label {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .pill input[type="date"] {
+            background: transparent;
+            border: none;
+            color: var(--text);
+            outline: none;
+            font-family: var(--font);
+            font-size: 13px;
+            padding: 0;
+        }
+
+
+        .btn {
+            border: none;
+            cursor: pointer;
+            color: var(--text);
+            padding: 10px 12px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(var(--blur));
+            box-shadow: var(--shadow2);
+            transition: transform .12s ease, background .12s ease, border-color .12s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 650;
+            font-size: 13px;
+            user-select: none;
+            white-space: nowrap;
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.18);
+        }
+
+        .btn:active {
+            transform: translateY(0px) scale(0.99)
+        }
+
+        .btn.primary {
+            background: linear-gradient(135deg, rgba(124, 77, 255, 0.9), rgba(0, 212, 255, 0.75));
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 16px 50px rgba(124, 77, 255, 0.25);
+        }
+
+        .btn.danger {
+            background: rgba(251, 113, 133, 0.14);
+            border-color: rgba(251, 113, 133, 0.24);
+        }
+
+        /* Grid layout */
+        .grid {
+            display: grid;
+            grid-template-columns: 1.05fr 1.95fr;
+            gap: 14px;
+            align-items: start;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--stroke);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(var(--blur));
+            overflow: hidden;
+            position: relative;
+        }
+
+        .card::before {
+            content: "";
+            position: absolute;
+            inset: -2px;
+            background:
+                radial-gradient(700px 160px at 20% 0%, rgba(124, 77, 255, 0.22), transparent 70%),
+                radial-gradient(700px 160px at 90% 0%, rgba(0, 212, 255, 0.18), transparent 70%);
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .card>* {
+            position: relative
+        }
+
+        .card-head {
+            padding: 16px 16px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            background: rgba(0, 0, 0, 0.10);
+        }
+
+        .card-title {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .card-title h3 {
+            margin: 0;
+            font-size: 14px;
+            letter-spacing: 0.2px;
+        }
+
+        .card-title p {
+            margin: 0;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .card-body {
+            padding: 14px 16px 16px;
+        }
+
+        /* Inputs */
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            margin-bottom: 12px;
+        }
+
+        .field .lbl {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .in {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(0, 0, 0, 0.18);
+            color: var(--text);
+            outline: none;
+            transition: border-color .12s ease, background .12s ease;
+        }
+
+        .in:focus {
+            border-color: rgba(124, 77, 255, 0.55);
+            background: rgba(0, 0, 0, 0.26);
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .row>* {
+            flex: 1
+        }
+
+        .hint {
+            color: var(--muted2);
+            font-size: 12px;
+            line-height: 1.35;
+            margin-top: -4px;
+            margin-bottom: 10px;
+        }
+
+
+        /* Stats */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .stat {
+            padding: 12px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .stat .k {
+            font-size: 12px;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .dot.good {
+            background: rgba(52, 211, 153, 0.9)
+        }
+
+        .dot.warn {
+            background: rgba(251, 191, 36, 0.9)
+        }
+
+        .dot.bad {
+            background: rgba(251, 113, 133, 0.9)
+        }
+
+        .dot.all {
+            background: linear-gradient(135deg, var(--accent), var(--accent2))
+        }
+
+        .stat .v {
+            margin-top: 6px;
+            font-size: 22px;
+            font-weight: 850;
+            letter-spacing: 0.3px;
+        }
+
+        /* Table */
+        .table-wrap{
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+        table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 100%;   /* NO forced scrolling */
+}
+
+
+        th,
+        td {
+            padding: 12px 12px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+            font-size: 13px;
+        }
+
+        th {
+            position: sticky;
+            top: 0;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(12px);
+            z-index: 2;
+            font-size: 12px;
+            color: var(--muted);
+            letter-spacing: .2px;
+            text-transform: uppercase;
+        }
+
+        .name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 750;
+        }
+
+        .avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.09);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            display: none;
+            place-items: center;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .badge {
+            padding: 6px 10px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 11px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.06);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .badge .mini {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .badge.present {
+            border-color: rgba(52, 211, 153, 0.28);
+            background: rgba(52, 211, 153, 0.10)
+        }
+
+        .badge.present .mini {
+            background: rgba(52, 211, 153, 0.9)
+        }
+
+        .badge.late {
+            border-color: rgba(251, 191, 36, 0.28);
+            background: rgba(251, 191, 36, 0.10)
+        }
+
+        .badge.late .mini {
+            background: rgba(251, 191, 36, 0.9)
+        }
+
+        .badge.absent {
+            border-color: rgba(251, 113, 133, 0.28);
+            background: rgba(251, 113, 133, 0.10)
+        }
+
+        .badge.absent .mini {
+            background: rgba(251, 113, 133, 0.9)
+        }
+
+        .badge.unset {
+            border-color: rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.06)
+        }
+
+        .actions{
+    display: flex;
+    flex-wrap: wrap;        /* 🔥 KEY: allow wrapping */
+    gap: 8px;
+    width: 100%;
+}
+
+
+.mini-btn {
+    border: none;
+    cursor: pointer;
+    padding: 8px 10px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
+    font-weight: 750;
+    font-size: 12px;
+
+    flex: 1 1 90px;     /* ✅ ADD */
+    max-width: 120px;  /* ✅ ADD */
+}
+
+
+
+
+        .mini-btn:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.18)
+        }
+
+        .mini-btn:active {
+            transform: translateY(0) scale(0.99)
+        }
+
+        .mini-btn.p {
+    background: rgba(52, 211, 153, 0.12);
+    border-color: rgba(52, 211, 153, 0.22)
+}
+
+.mini-btn.l {
+    background: rgba(251, 191, 36, 0.12);
+    border-color: rgba(251, 191, 36, 0.22)
+}
+
+.mini-btn.a {
+    background: rgba(251, 113, 133, 0.12);
+    border-color: rgba(251, 113, 133, 0.22)
+}
+
+.mini-btn.x {
+    background: rgba(255, 255, 255, 0.06)
+}
+
+.mini-btn.del {
+    background: rgba(251, 113, 133, 0.14);
+    border-color: rgba(251, 113, 133, 0.26)
+}
+
+
+        .note {
+            color: var(--muted);
+            font-size: 12px;
+            max-width: 280px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 22px;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.65);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(14px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .18s ease, transform .18s ease;
+            max-width: min(560px, calc(100% - 28px));
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-2px);
+        }
+
+        .toast .t {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.86);
+        }
+
+        .toast .undo {
+            margin-left: auto;
+            border: none;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.10);
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: var(--text);
+            font-weight: 800;
+            font-size: 12px;
+            padding: 7px 10px;
+            border-radius: 12px;
+        }
+
+        /* Footer tips */
+        .tips {
+            margin-top: 12px;
+            color: var(--muted2);
+            font-size: 12px;
+            line-height: 1.45;
+        }
+
+        kbd {
+            font-family: var(--font);
+            font-size: 11px;
+            padding: 3px 8px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            background: rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.82);
+        }
+
+        /* Small screens (still ok even if you don't care) */
+        @media (max-width: 980px) {
+            .grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 14px;
+    align-items: stretch;
+}
+
+
+            table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 100%;
+}
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .top {
+                flex-direction: column;
+                align-items: stretch
+            }
+
+            .right-actions {
+                justify-content: flex-start
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="wrap">
+        <div class="top">
+            <div class="brand">
+                <div class="title">
+                    <div class="logo"></div>
+                    3 Cam Brother
+                </div>
+                <div class="subtitle">
+                    A modern attendance tracker with quick status buttons, notes, search, stats, CSV export, and
+                    auto-save.
+                </div>
+            </div>
+
+            <div class="right-actions">
+                <div class="pill">
+                    <label for="datePick">Date</label>
+                    <input id="datePick" type="date" />
+                </div>
+                <button class="btn" id="btnExport" title="Export to CSV">
+                    ⬇️ Export CSV
+                </button>
+                <button class="btn danger" id="btnReset" title="Clear all for this date">
+                    🧹 Reset Day
+                </button>
+                <button class="btn primary" id="btnDemo" title="Load demo students">
+                    ✨ Load Demo
+                </button>
+            </div>
+        </div>
+
+        <div class="grid">
+            <!-- Left: Add + Tools -->
+            <div class="card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h3>Class Setup</h3>
+                        <p>Add students + search quickly</p>
+                    </div>
+                    <button class="btn" id="btnAddQuick" title="Focus add student form">
+                        ➕ Add
+                    </button>
+                </div>
+
+                <div class="card-body">
+                    <div class="field">
+                        <div class="lbl">Search students</div>
+                        <input id="search" class="in" placeholder="Type a name, ID, or tag..." />
+                    </div>
+
+                    <div class="field">
+                        <div class="lbl">Student ID</div>
+                        <input id="sid" class="in" placeholder="Enter Id" />
+                    </div>
+
+                    <div class="field">
+                        <div class="lbl">Student name</div>
+                        <input id="sname" class="in" placeholder="Enter Name" />
+                    </div>
+
+                    <div class="field">
+                        <div class="lbl">Tag / Group</div>
+                        <input id="stag" class="in" placeholder="e.g. A, Morning, Web, IELTS" />
+                    </div>
+
+                    <div class="hint">
+                        Tip: Use tags for groups like <b>Class A</b>, <b>Morning</b>, <b>Web Dev</b>. This helps
+                        filtering.
+                    </div>
+
+                    <div class="row">
+                        <button class="btn primary" id="btnAdd">
+                            ✅ Add Student
+                        </button>
+                        <button class="btn" id="btnSort">
+                            ↕️ Sort A→Z
+                        </button>
+                    </div>
+
+                    <!-- <div class="tips">
+                        Shortcuts: <kbd>/</kbd> focus search • <kbd>N</kbd> focus add form • <kbd>Esc</kbd> clear search
+                        • <kbd>Ctrl</kbd>+<kbd>S</kbd> export CSV
+                    </div> -->
+                </div>
+            </div>
+
+            <!-- Right: Stats + Table -->
+            <div class="card">
+                <div class="card-head">
+                    <div class="card-title">
+                        <h3>Attendance Dashboard</h3>
+                        <p>Mark present / late / absent — with optional notes</p>
+                    </div>
+                    <div class="pill" style="gap:8px">
+                        <label>Saved</label>
+                        <span id="saveState" style="font-size:12px;color:var(--muted)">Ready</span>
+                    </div>
+                </div>
+
+
+                <div class="card-body">
+                    <div class="stats">
+                        <div class="stat">
+                            <div class="k"><span class="dot all"></span>Total</div>
+                            <div class="v" id="stTotal">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="k"><span class="dot good"></span>Present</div>
+                            <div class="v" id="stPresent">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="k"><span class="dot warn"></span>Late</div>
+                            <div class="v" id="stLate">0</div>
+                        </div>
+                        <div class="stat">
+                            <div class="k"><span class="dot bad"></span>Absent</div>
+                            <div class="v" id="stAbsent">0</div>
+                        </div>
+                    </div>
+
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th style="width: 240px;">Student</th>
+                                    <th style="width: 120px;">ID</th>
+                                    <th style="width: 120px;">Tag</th>
+                                    <th style="width: 160px;">Status</th>
+                                    <th>Note</th>
+                                    <th style="width: 310px;">Quick Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                                <!-- rows -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tips">
+                        Status meaning: <b>Present</b> = attended • <b>Late</b> = came late • <b>Absent</b> = no show •
+                        <b>Unset</b> = not marked yet.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <div class="t" id="toastText">Updated.</div>
+        <button class="undo" id="btnUndo">Undo</button>
+    </div>
+</div>
+    <script>
+        // -----------------------------
+        // Attendance App (LocalStorage)
+        // -----------------------------
+        const $ = (q) => document.querySelector(q);
+
+        const els = {
+            datePick: $("#datePick"),
+            search: $("#search"),
+            sid: $("#sid"),
+            sname: $("#sname"),
+            stag: $("#stag"),
+            btnAdd: $("#btnAdd"),
+            btnAddQuick: $("#btnAddQuick"),
+            btnSort: $("#btnSort"),
+            btnExport: $("#btnExport"),
+            btnReset: $("#btnReset"),
+            btnDemo: $("#btnDemo"),
+            tbody: $("#tbody"),
+            stTotal: $("#stTotal"),
+            stPresent: $("#stPresent"),
+            stLate: $("#stLate"),
+            stAbsent: $("#stAbsent"),
+            saveState: $("#saveState"),
+            toast: $("#toast"),
+            toastText: $("#toastText"),
+            btnUndo: $("#btnUndo"),
+        };
+
+        // Data shape:
+        // store[dateKey] = { students: [{id,name,tag,status,note,updatedAt}] }
+        // status: "unset" | "present" | "late" | "absent"
+        const LS_KEY = "attendance_modern_v1";
+        let store = loadStore();
+        let dateKey = todayKey(); // default
+        let sortAZ = true;
+
+        // Undo stack (last action)
+        let lastSnapshot = null; // {dateKey, dataDeepCopy, message}
+        let toastTimer = null;
+
+        // Init
+        initDatePicker();
+        render();
+
+        // -----------------------------
+        // Events
+        // -----------------------------
+        els.btnAdd.addEventListener("click", addStudentFromForm);
+        els.btnAddQuick.addEventListener("click", () => {
+            els.sid.focus();
+            ping("Ready to add: fill ID + Name.");
+        });
+
+
+        els.search.addEventListener("input", render);
+        els.btnSort.addEventListener("click", () => {
+            sortAZ = !sortAZ;
+            ping(sortAZ ? "Sorting A → Z" : "Sorting Z → A");
+            render();
+        });
+
+        els.datePick.addEventListener("change", () => {
+            dateKey = els.datePick.value || todayKey();
+            ensureDate(dateKey);
+            ping("Switched date: " + prettyDate(dateKey));
+            render();
+        });
+
+        els.btnExport.addEventListener("click", exportCSV);
+        els.btnReset.addEventListener("click", resetDay);
+        els.btnDemo.addEventListener("click", loadDemo);
+
+        els.btnUndo.addEventListener("click", undoLast);
+
+        // Keyboard shortcuts
+        document.addEventListener("keydown", (e) => {
+            const key = e.key.toLowerCase();
+            if (key === "/" && !isTyping(e.target)) {
+                e.preventDefault();
+                els.search.focus();
+                return;
+            }
+            if (key === "n" && !isTyping(e.target)) {
+                e.preventDefault();
+                els.sid.focus();
+                return;
+            }
+            if (key === "escape") {
+                if (document.activeElement === els.search) {
+                    els.search.value = "";
+                    render();
+                    ping("Search cleared.");
+                }
+                return;
+            }
+            // Ctrl+S Export
+            if ((e.ctrlKey || e.metaKey) && key === "s") {
+                e.preventDefault();
+                exportCSV();
+                return;
+            }
+        });
+
+        // Enter to add
+        [els.sid, els.sname, els.stag].forEach(inp => {
+            inp.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") addStudentFromForm();
+            });
+        });
+
+        // -----------------------------
+        // Core functions
+        // -----------------------------
+        function ensureDate(key) {
+            if (!store[key]) store[key] = { students: [] };
+        }
+
+        function addStudentFromForm() {
+            const id = els.sid.value.trim();
+            const name = els.sname.value.trim();
+            const tag = els.stag.value.trim();
+
+            if (!id || !name) {
+                ping("Please enter Student ID + Name.");
+                if (!id) els.sid.focus();
+                else els.sname.focus();
+                return;
+            }
+
+            ensureDate(dateKey);
+
+            // prevent duplicate id
+            const exists = store[dateKey].students.some(s => s.id.toLowerCase() === id.toLowerCase());
+            if (exists) {
+                ping("That Student ID already exists for this date.");
+                els.sid.focus();
+                return;
+            }
+
+            snapshot("Added student " + name);
+
+            store[dateKey].students.push({
+                id, name, tag,
+                status: "unset",
+                note: "",
+                updatedAt: Date.now()
+            });
+
+            saveStore();
+            els.sid.value = "";
+            els.sname.value = "";
+            els.stag.value = "";
+            els.sid.focus();
+            render();
+            ping("Student added: " + name, true);
+        }
+
+        function setStatus(studentId, status) {
+            ensureDate(dateKey);
+            const list = store[dateKey].students;
+            const idx = list.findIndex(s => s.id === studentId);
+            if (idx === -1) return;
+
+            snapshot("Changed status for " + list[idx].name);
+
+            list[idx].status = status;
+            list[idx].updatedAt = Date.now();
+
+            saveStore();
+            render();
+            ping("Updated: " + list[idx].name + " → " + statusLabel(status), true);
+        }
+
+        function setNote(studentId, note) {
+            ensureDate(dateKey);
+            const list = store[dateKey].students;
+            const idx = list.findIndex(s => s.id === studentId);
+            if (idx === -1) return;
+
+            snapshot("Updated note for " + list[idx].name);
+
+
+            list[idx].note = note;
+            list[idx].updatedAt = Date.now();
+
+            saveStore(false); // silent
+            render(false);
+            ping("Saved note for " + list[idx].name, true);
+        }
+
+        function clearMark(studentId) {
+            setStatus(studentId, "unset");
+        }
+
+        function deleteStudent(studentId) {
+            ensureDate(dateKey);
+            const list = store[dateKey].students;
+            const idx = list.findIndex(s => s.id === studentId);
+            if (idx === -1) return;
+
+            snapshot("Deleted " + list[idx].name);
+
+            const removed = list.splice(idx, 1)[0];
+            saveStore();
+            render();
+            ping("Deleted: " + removed.name, true);
+        }
+
+        function resetDay() {
+            ensureDate(dateKey);
+            if (store[dateKey].students.length === 0) {
+                ping("Nothing to reset for this date.");
+                return;
+            }
+            snapshot("Reset day " + prettyDate(dateKey));
+
+            // Reset statuses + notes (keep students)
+            store[dateKey].students = store[dateKey].students.map(s => ({
+                ...s,
+                status: "unset",
+                note: "",
+                updatedAt: Date.now()
+            }));
+
+            saveStore();
+            render();
+            ping("Reset complete for " + prettyDate(dateKey), true);
+        }
+
+        function loadDemo() {
+            ensureDate(dateKey);
+            if (store[dateKey].students.length > 0) {
+                ping("This date already has students. Reset day first if you want demo.");
+                return;
+            }
+
+            snapshot("Loaded demo students");
+
+            store[dateKey].students = [
+                { id: "001", name: "Monychan Mom", tag: "Web A", status: "unset", note: "", updatedAt: Date.now() },
+                { id: "002", name: "Senghok Chak", tag: "Web A", status: "unset", note: "", updatedAt: Date.now() },
+                { id: "003", name: "Nora", tag: "Web B", status: "unset", note: "", updatedAt: Date.now() },
+                { id: "004", name: "Sokha", tag: "Morning", status: "unset", note: "", updatedAt: Date.now() },
+                { id: "005", name: "Dara", tag: "Morning", status: "unset", note: "", updatedAt: Date.now() },
+                { id: "006", name: "Sreyneang", tag: "Evening", status: "unset", note: "", updatedAt: Date.now() }
+            ];
+
+            saveStore();
+            render();
+            ping("Demo loaded. Start marking attendance!", true);
+        }
+
+        function exportCSV() {
+            ensureDate(dateKey);
+            const rows = store[dateKey].students.slice();
+
+            // Sort export by name A-Z
+            rows.sort((a, b) => a.name.localeCompare(b.name));
+
+            const header = ["Date", "Student ID", "Name", "Tag", "Status", "Note", "Updated At"];
+            const csvLines = [header.join(",")];
+
+            for (const s of rows) {
+                const line = [
+                    csvSafe(dateKey),
+                    csvSafe(s.id),
+                    csvSafe(s.name),
+                    csvSafe(s.tag || ""),
+                    csvSafe(statusLabel(s.status)),
+                    csvSafe(s.note || ""),
+                    csvSafe(new Date(s.updatedAt || Date.now()).toLocaleString())
+                ].join(",");
+                csvLines.push(line);
+            }
+
+            const blob = new Blob([csvLines.join("\n")], { type: "text/csv;charset=utf-8;" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = `attendance_${dateKey}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+
+            ping("Exported CSV for " + prettyDate(dateKey), true);
+        }
+
+        // -----------------------------
+        // Render
+        // -----------------------------
+        function render(withStats = true) {
+            ensureDate(dateKey);
+
+
+            const q = els.search.value.trim().toLowerCase();
+            let list = store[dateKey].students.slice();
+
+            // sort
+            list.sort((a, b) => {
+                const cmp = a.name.localeCompare(b.name);
+                return sortAZ ? cmp : -cmp;
+            });
+
+            // filter
+            if (q) {
+                list = list.filter(s =>
+                    (s.name || "").toLowerCase().includes(q) ||
+                    (s.id || "").toLowerCase().includes(q) ||
+                    (s.tag || "").toLowerCase().includes(q) ||
+                    (s.note || "").toLowerCase().includes(q)
+                );
+            }
+
+            // table rows
+            els.tbody.innerHTML = "";
+            for (const s of list) {
+                const tr = document.createElement("tr");
+
+                const initials = makeInitials(s.name);
+
+                tr.innerHTML = `
+        <td>
+          <div class="name">
+            <div class="avatar">${initials}</div>
+            <div style="display:flex;flex-direction:column;gap:2px">
+              <div style="font-weight:850">${escapeHtml(s.name)}</div>
+              <div style="font-size:12px;color:var(--muted2)">
+                Updated: ${timeAgo(s.updatedAt)}
+              </div>
+            </div>
+          </div>
+        </td>
+
+        <td>${escapeHtml(s.id)}</td>
+        <td>${escapeHtml(s.tag || "-")}</td>
+
+        <td>
+          ${statusBadge(s.status)}
+        </td>
+
+        <td>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input class="in" style="padding:9px 10px;border-radius:12px;min-width:220px"
+              value="${escapeAttr(s.note || "")}"
+              placeholder="Optional note (reason, time...)"
+              data-note="${escapeAttr(s.id)}"
+            />
+          </div>
+        </td>
+
+        <td>
+          <div class="actions">
+            <button class="mini-btn p" data-act="present" data-id="${escapeAttr(s.id)}">Present</button>
+            <button class="mini-btn l" data-act="late" data-id="${escapeAttr(s.id)}">Late</button>
+            <button class="mini-btn a" data-act="absent" data-id="${escapeAttr(s.id)}">Absent</button>
+            <button class="mini-btn x" data-act="unset" data-id="${escapeAttr(s.id)}">Clear</button>
+            <button class="mini-btn del" data-act="delete" data-id="${escapeAttr(s.id)}">Delete</button>
+          </div>
+        </td>
+      `;
+
+                els.tbody.appendChild(tr);
+            }
+
+            // attach row button events
+            els.tbody.querySelectorAll("button[data-act]").forEach(btn => {
+                btn.addEventListener("click", () => {
+                    const id = btn.getAttribute("data-id");
+                    const act = btn.getAttribute("data-act");
+                    if (act === "delete") deleteStudent(id);
+                    else setStatus(id, act);
+                });
+            });
+
+            // note inputs events (debounced)
+            els.tbody.querySelectorAll("input[data-note]").forEach(inp => {
+                const sid = inp.getAttribute("data-note");
+                inp.addEventListener("input", debounce((e) => {
+                    setNote(sid, e.target.value);
+                }, 450));
+            });
+
+            if (withStats) updateStats();
+
+
+            // Empty state
+            if (store[dateKey].students.length === 0) {
+                els.tbody.innerHTML = `
+        <tr>
+          <td colspan="6" style="padding: 22px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div class="avatar" style="width:42px;height:42px;border-radius:16px;">✨</div>
+              <div>
+                <div style="font-weight:900;font-size:14px;">No students yet for ${prettyDate(dateKey)}</div>
+                <div style="color:var(--muted);font-size:12px;margin-top:4px;line-height:1.5">
+                  Add students on the left, or click <b>Load Demo</b> to test the system.
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      `;
+                updateStats();
+            }
+        }
+
+        function updateStats() {
+            ensureDate(dateKey);
+            const all = store[dateKey].students;
+
+            const present = all.filter(s => s.status === "present").length;
+            const late = all.filter(s => s.status === "late").length;
+            const absent = all.filter(s => s.status === "absent").length;
+
+            els.stTotal.textContent = all.length;
+            els.stPresent.textContent = present;
+            els.stLate.textContent = late;
+            els.stAbsent.textContent = absent;
+        }
+
+        // -----------------------------
+        // Storage
+        // -----------------------------
+        function loadStore() {
+            try {
+                const raw = localStorage.getItem(LS_KEY);
+                if (!raw) return {};
+                const parsed = JSON.parse(raw);
+                if (typeof parsed !== "object" || parsed === null) return {};
+                return parsed;
+            } catch (e) {
+                return {};
+            }
+        }
+
+        function saveStore(showSaved = true) {
+            try {
+                localStorage.setItem(LS_KEY, JSON.stringify(store));
+                if (showSaved) {
+                    els.saveState.textContent = "Saved ✔️";
+                    setTimeout(() => els.saveState.textContent = "Ready", 900);
+                }
+            } catch (e) {
+                els.saveState.textContent = "Save failed";
+            }
+        }
+
+        // -----------------------------
+        // Undo + Toast
+        // -----------------------------
+        function snapshot(message) {
+            // deep copy only current day
+            ensureDate(dateKey);
+            lastSnapshot = {
+                dateKey,
+                data: JSON.parse(JSON.stringify(store[dateKey])),
+                message
+            };
+            showToast(message + " (Undo?)");
+        }
+
+        function undoLast() {
+            if (!lastSnapshot) return;
+            const { dateKey: dk, data } = lastSnapshot;
+
+            store[dk] = data;
+            saveStore();
+            render();
+            ping("Undone.", true);
+            lastSnapshot = null;
+            hideToast();
+        }
+
+        function showToast(text) {
+            els.toastText.textContent = text;
+            els.toast.classList.add("show");
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => {
+                hideToast();
+            }, 5200);
+        }
+        function hideToast() {
+            els.toast.classList.remove("show");
+        }
+
+        // -----------------------------
+        // Helpers
+        // -----------------------------
+        function initDatePicker() {
+            const t = todayKey();
+            els.datePick.value = t;
+            dateKey = t;
+            ensureDate(dateKey);
+        }
+
+        function todayKey() {
+            const d = new Date();
+            const yyyy = d.getFullYear();
+            const mm = String(d.getMonth() + 1).padStart(2, "0");
+            const dd = String(d.getDate()).padStart(2, "0");
+            return `${yyyy}-${mm}-${dd}`;
+        }
+
+
+        function prettyDate(key) {
+            // key: YYYY-MM-DD
+            try {
+                const d = new Date(key + "T00:00:00");
+                return d.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+            } catch (e) {
+                return key;
+            }
+        }
+
+        function statusLabel(s) {
+            if (s === "present") return "Present";
+            if (s === "late") return "Late";
+            if (s === "absent") return "Absent";
+            return "Unset";
+        }
+
+        function statusBadge(s) {
+            const label = statusLabel(s);
+            const cls = (s === "present" || s === "late" || s === "absent") ? s : "unset";
+            return `<span class="badge ${cls}">
+      <span class="mini"></span>${label}
+    </span>`;
+        }
+
+        function makeInitials(name) {
+            const parts = (name || "").trim().split(/\s+/).filter(Boolean);
+            const a = (parts[0] || "").slice(0, 1).toUpperCase();
+            const b = (parts[1] || "").slice(0, 1).toUpperCase();
+            return (a + b) || "👤";
+        }
+
+        function timeAgo(ts) {
+            if (!ts) return "—";
+            const diff = Date.now() - ts;
+            const s = Math.floor(diff / 1000);
+            if (s < 10) return "just now";
+            if (s < 60) return s + "s ago";
+            const m = Math.floor(s / 60);
+            if (m < 60) return m + "m ago";
+            const h = Math.floor(m / 60);
+            if (h < 24) return h + "h ago";
+            const d = Math.floor(h / 24);
+            return d + "d ago";
+        }
+
+        function csvSafe(v) {
+            const s = String(v ?? "");
+            if (/[",\n]/.test(s)) {
+                return `"${s.replaceAll('"', '""')}"`;
+            }
+            return s;
+        }
+
+        function escapeHtml(str) {
+            return String(str ?? "")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+        function escapeAttr(str) {
+            return escapeHtml(str).replaceAll("\n", " ");
+        }
+
+        function isTyping(el) {
+            if (!el) return false;
+            const tag = (el.tagName || "").toLowerCase();
+            return tag === "input" || tag === "textarea" || el.isContentEditable;
+        }
+
+        function ping(msg, showUndo = false) {
+            els.saveState.textContent = msg;
+            clearTimeout(window.__pingTimer);
+            window.__pingTimer = setTimeout(() => {
+                els.saveState.textContent = "Ready";
+            }, 1200);
+
+            if (showUndo) showToast(msg + (lastSnapshot ? " • Undo available" : ""));
+        }
+
+        // Debounce for note save
+        function debounce(fn, delay = 300) {
+            let t = null;
+            return (...args) => {
+                clearTimeout(t);
+                t = setTimeout(() => fn(...args), delay);
+            };
+        }
+    </script>
+</body>
+
+</html>
